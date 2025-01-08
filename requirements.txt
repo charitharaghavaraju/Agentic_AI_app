@@ -1,17 +1,18 @@
 phidata
-python-dotenv
-yfinance
-packaging
+# python-dotenv
+# yfinance
+# packaging
 duckduckgo-search
 fastapi
 uvicorn
 groq
-openai
 sqlalchemy
 pgvector
 psycopg[binary]
 pypdf
-sentence-transformers
-torch
-torchvision
-torchaudio
+# sentence-transformers
+# torch
+# torchvision
+# torchaudio
+streamlit
+google-generativeai
