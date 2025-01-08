@@ -13,14 +13,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 os.environ['GROQ_API_KEY'] = os.getenv("GROQ_API_KEY")
-os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
 db_url = "postgresql+psycopg://ai:ai@localhost:5532/ai"
 
 embedder = SentenceTransformerEmbedder(batch_size=100, dimensions=768, model="sentence-transformers/all-mpnet-base-v2" )
 
 knowledge_base = PDFUrlKnowledgeBase(
     urls=["https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"],
-    vector_db=PgVector2(collection="recipes", db_url=db_url)
+    vector_db=PgVector2(collection="recipes", db_url=db_url, embedder=embedder)
 )
 
 sample_embedding = embedder.get_embedding(text="This is a test sentence.")
@@ -34,7 +33,7 @@ def pdf_assistant(new: bool = False, user: str = "user"):
     run_id: Optional[str] = None
 
     if not new:
-        existing_run_ids: List[str] = storage.get_all_run_ids(user=user)
+        existing_run_ids: List[str] = storage.get_all_run_ids()
         if len(existing_run_ids) > 0:
             run_id = existing_run_ids[0]
 
