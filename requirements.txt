@@ -7,3 +7,11 @@ fastapi
 uvicorn
 groq
 openai
+sqlalchemy
+pgvector
+psycopg[binary]
+pypdf
+sentence-transformers
+torch
+torchvision
+torchaudio
